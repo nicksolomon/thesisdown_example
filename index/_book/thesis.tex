@@ -1,195 +1,116 @@
-% This is the Reed College LaTeX thesis template. Most of the work
-% for the document class was done by Sam Noble (SN), as well as this
-% template. Later comments etc. by Ben Salzberg (BTS). Additional
-% restructuring and APA support by Jess Youngberg (JY).
-% Your comments and suggestions are more than welcome; please email
-% them to cus@reed.edu
-%
-% See http://web.reed.edu/cis/help/latex.html for help. There are a
-% great bunch of help pages there, with notes on
-% getting started, bibtex, etc. Go there and read it if you're not
-% already familiar with LaTeX.
-%
-% Any line that starts with a percent symbol is a comment.
-% They won't show up in the document, and are useful for notes
-% to yourself and explaining commands.
-% Commenting also removes a line from the document;
-% very handy for troubleshooting problems. -BTS
-
-% As far as I know, this follows the requirements laid out in
-% the 2002-2003 Senior Handbook. Ask a librarian to check the
-% document before binding. -SN
-
-%%
-%% Preamble
-%%
-% \documentclass{<something>} must begin each LaTeX document
-\documentclass[12pt,twoside]{reedthesis}
-% Packages are extensions to the basic LaTeX functions. Whatever you
-% want to typeset, there is probably a package out there for it.
-% Chemistry (chemtex), screenplays, you name it.
-% Check out CTAN to see: http://www.ctan.org/
-%%
-\usepackage{graphicx,latexsym}
-\usepackage{amsmath}
-\usepackage{amssymb,amsthm}
-\usepackage{longtable,booktabs,setspace}
-\usepackage{chemarr} %% Useful for one reaction arrow, useless if you're not a chem major
-\usepackage[hyphens]{url}
-% Added by CII
-\usepackage{hyperref}
+\documentclass[]{article}
 \usepackage{lmodern}
-\usepackage{float}
-\floatplacement{figure}{H}
-% End of CII addition
-\usepackage{rotating}
-
-% Next line commented out by CII
-%%% \usepackage{natbib}
-% Comment out the natbib line above and uncomment the following two lines to use the new
-% biblatex-chicago style, for Chicago A. Also make some changes at the end where the
-% bibliography is included.
-%\usepackage{biblatex-chicago}
-%\bibliography{thesis}
-
-
-% Added by CII (Thanks, Hadley!)
-% Use ref for internal links
-\renewcommand{\hyperref}[2][???]{\autoref{#1}}
-\def\chapterautorefname{Chapter}
-\def\sectionautorefname{Section}
-\def\subsectionautorefname{Subsection}
-% End of CII addition
-
-% Added by CII
-\usepackage{caption}
-\captionsetup{width=5in}
-% End of CII addition
-
-% \usepackage{times} % other fonts are available like times, bookman, charter, palatino
-
-
-% To pass between YAML and LaTeX the dollar signs are added by CII
-\title{My Final College Paper}
-\author{Your R. Name}
-% The month and year that you submit your FINAL draft TO THE LIBRARY (May or December)
-\date{May 20xx}
-\division{Mathematics and Natural Sciences}
-\advisor{Advisor F. Name}
-%If you have two advisors for some reason, you can use the following
-% Uncommented out by CII
-% End of CII addition
-
-%%% Remember to use the correct department!
-\department{Mathematics}
-% if you're writing a thesis in an interdisciplinary major,
-% uncomment the line below and change the text as appropriate.
-% check the Senior Handbook if unsure.
-%\thedivisionof{The Established Interdisciplinary Committee for}
-% if you want the approval page to say "Approved for the Committee",
-% uncomment the next line
-%\approvedforthe{Committee}
-
-% Added by CII
-%%% Copied from knitr
-%% maxwidth is the original width if it's less than linewidth
-%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
-\makeatletter
-\def\maxwidth{ %
-  \ifdim\Gin@nat@width>\linewidth
-    \linewidth
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
   \else
-    \Gin@nat@width
+    \usepackage{fontspec}
   \fi
-}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Broken equations},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
 \makeatother
-
-\renewcommand{\contentsname}{Table of Contents}
-% End of CII addition
-
-\setlength{\parskip}{0pt}
-
-% Added by CII
-
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
 
-\Acknowledgements{
-I want to thank a few people.
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
 }
 
-\Dedication{
-You can have a dedication here if you wish.
-}
+\setlength{\droptitle}{-2em}
+  \title{Broken equations}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{}
+  \preauthor{}\postauthor{}
+  \date{}
+  \predate{}\postdate{}
 
-\Preface{
-This is an example of a thesis setup to use the reed thesis document
-class (for LaTeX) and the R bookdown package, in general.
-}
+\setlength{\parindent}{.5in}
 
-\Abstract{
-The preface pretty much says it all. \par  Second paragraph of abstract
-starts here.
-}
-
-% End of CII addition
-%%
-%% End Preamble
-%%
-%
-
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
 \begin{document}
+\maketitle
 
-% Everything below added by CII
-      \maketitle
-  
-  \frontmatter % this stuff will be roman-numbered
-  \pagestyle{empty} % this removes page numbers from the frontmatter
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\section{Introduction}\label{introduction}
 
-      \begin{acknowledgements}
-      I want to thank a few people.
-    \end{acknowledgements}
-  
-      \begin{preface}
-      This is an example of a thesis setup to use the reed thesis document
-      class (for LaTeX) and the R bookdown package, in general.
-    \end{preface}
-  
-      \hypersetup{linkcolor=black}
-    \setcounter{tocdepth}{2}
-    \tableofcontents
-  
-      \listoftables
-  
-      \listoffigures
-  
-      \begin{abstract}
-      The preface pretty much says it all. \par  Second paragraph of abstract
-      starts here.
-    \end{abstract}
-  
-      \begin{dedication}
-      You can have a dedication here if you wish.
-    \end{dedication}
-  
-  \mainmatter % here the regular arabic numbering starts
-  \pagestyle{fancyplain} % turns page numbering back on
+This is an example of the issue I'm having. Here is an equation:
 
-  \chapter*{Introduction}\label{introduction}
-  \addcontentsline{toc}{chapter}{Introduction}
-  
-  This is an example of the issue I'm having. Here is an equation:
-  
-  \begin{equation}
-    P(\mathbf{Y} = \mathbf{y}) = \frac{e^{\theta \cdot g(\mathbf{y})}}{C(\theta, \mathcal{Y})}
-    \label{eq:ergm},
-  \end{equation}
-  
-  and this line should be indented because the .tex file has extra blank
-  lines
+\begin{equation}
+  y = mx + b
+\end{equation}
 
+and this line should be indented because the .tex file has extra blank
+lines
 
-  % Index?
 
 \end{document}
-
